@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Paulo</title>
+    <link rel="stylesheet" href="stylecontato.css">
+</head>
+<body>
+    <header>
+        <img src="img/pessoa-Photoroom.png" alt="">
+        <a href="index.html">
+            <h2>Paulo Vitor</h2>
+        </a>
+        <h5>Desenvolvedor Full Stack</h5>
+        <nav>
+            <a href="index.html">Início | </a>
+            <a href="cursos.html">Cursos | </a>
+            <a href="projetos.html">Projetos | </a>
+            <a href="contato.html">Contato | </a>
+            <a href="login.html">Painel </a>
+        </nav>
+        <br>
+    </header>
+
+    <main>
+        <div class="header-form">Entre em Contato!</div>
+        <form id="meuForm">
+            <div style="display: flex; gap: 20px;">
+                <input type="text" name="nome" placeholder="Nome" required>
+                <input type="email" name="email" placeholder="Seu Email" required>
+            </div>
+            <br>
+            <input type="text" name="titulo" placeholder="Título" required>
+            <br><br>
+            <textarea name="mensagem" placeholder="Sua Mensagem" required></textarea>
+            <br><br>
+            <button type="submit">Enviar</button>
+        </form>
+        <p id="statusMensagem"></p>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Todos os Direitos Reservados - Paulo Vitor</p>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        emailjs.init("7_4GeKAKGXRmJZQVy"); // User ID
+
+        const form = document.getElementById("meuForm");
+        const statusMensagem = document.getElementById("statusMensagem");
+
+        form.addEventListener("submit", function(e){
+            e.preventDefault();
+
+            emailjs.sendForm(
+                "service_88sbmcw",      // Service ID
+                "template_hudeghk",     // Template ID
+                this
+            ).then(() => {
+                statusMensagem.textContent = "Mensagem enviada com sucesso!";
+                statusMensagem.style.color = "green";
+                form.reset();
+            }, (err) => {
+                console.error(err);
+                statusMensagem.textContent = "Erro ao enviar a mensagem. Tente novamente.";
+                statusMensagem.style.color = "red";
+            });
+        });
+    </script>
+</body>
+</html>
